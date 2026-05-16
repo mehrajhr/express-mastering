@@ -4,7 +4,7 @@ import express, {
   type Response,
 } from "express";
 import { Pool } from "pg";
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 dotenv.config();
 
 const app: Application = express();
@@ -15,8 +15,7 @@ app.use(express.text()); //midleware
 app.use(express.urlencoded({ extended: true })); // midleware
 
 const pool = new Pool({
-  connectionString:
-    `postgresql://neondb_owner:${process.env.CONNECTION_STRING_PASS}@ep-super-shadow-appicnbf-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`,
+  connectionString: `postgresql://neondb_owner:${process.env.CONNECTION_STRING_PASS}@ep-super-shadow-appicnbf-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`,
 });
 
 const initDB = async () => {
@@ -24,8 +23,8 @@ const initDB = async () => {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users(
       id SERIAL PRIMARY KEY,
-      name VARCHAR(20) NOT NULL,
-      email VARCHAR(20) NOT NULL,
+      name VARCHAR(25) NOT NULL,
+      email VARCHAR(25) UNIQUE NOT NULL,
       password VARCHAR(20) NOT NULL,
       is_active BOOLEAN DEFAULT true,
       age INT,
@@ -49,13 +48,27 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.post("/", async (req: Request, res: Response) => {
+app.post("/user", async (req: Request, res: Response) => {
   // console.log(req.body);
-  const body = req.body;
-  res.status(201).json({
-    message: "Created successfully",
-    data: body,
-  });
+  const { name, email, password, age } = req.body;
+
+  try {
+    const result = await pool.query(
+      `
+    INSERT INTO users (name , email , password , age) VALUES($1,$2,$3,$4) RETURNING *
+    `,
+      [name, email, password, age],
+    );
+    res.status(201).json({
+      message: "User created successfully",
+      data: result.rows[0],
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+      error,
+    });
+  }
 });
 
 app.listen(port, () => {
