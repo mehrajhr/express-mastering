@@ -48,7 +48,26 @@ app.get("/", (req: Request, res: Response) => {
   });
 });
 
-app.post("/user", async (req: Request, res: Response) => {
+app.get("/api/users", async (req: Request, res: Response) => {
+  try {
+    const result = await pool.query(`
+      SELECT * FROM users
+      `);
+    // console.log(result);
+    res.status(200).json({
+      success: true,
+      message: "Data retrieved successfully",
+      users: result.rows,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      message: error.message,
+      error: error,
+    });
+  }
+});
+
+app.post("/api/users", async (req: Request, res: Response) => {
   // console.log(req.body);
   const { name, email, password, age } = req.body;
 
