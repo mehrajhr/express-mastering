@@ -4,18 +4,17 @@ import express, {
   type Response,
 } from "express";
 import { Pool } from "pg";
-import dotenv from "dotenv";
-dotenv.config();
+import config from "./config";
 
 const app: Application = express();
-const port = 5000;
+const port = config.port;
 
 app.use(express.json()); //midleware
 app.use(express.text()); //midleware
 app.use(express.urlencoded({ extended: true })); // midleware
 
 const pool = new Pool({
-  connectionString: `postgresql://neondb_owner:${process.env.CONNECTION_STRING_PASS}@ep-super-shadow-appicnbf-pooler.c-7.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require`,
+  connectionString: config.connectionString,
 });
 
 const initDB = async () => {
