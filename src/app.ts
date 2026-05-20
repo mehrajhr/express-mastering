@@ -6,12 +6,14 @@ import express, {
 import { userRoute } from "./modules/user/user.route";
 import { profileRoute } from "./modules/profile/profile.route";
 import { authRoute } from "./modules/auth/auth.route";
+import logger from "./middleware/logger";
 
 const app: Application = express();
 
 app.use(express.json()); //midleware
 app.use(express.text()); //midleware
 app.use(express.urlencoded({ extended: true })); // midleware
+app.use(logger);
 
 app.get("/", (req: Request, res: Response) => {
   // res.send("This is express servers");
