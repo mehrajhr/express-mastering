@@ -146,3 +146,45 @@
  Method -> GET - URL -> /api/users - Time -> 1779352617746 
 
  Method -> GET - URL -> /api/users - Time -> 1779352624631 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353615761 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353628305 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353633456 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353639441 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353741614 
+
+ Method -> POST - URL -> /api/auth/login - Time -> 1779353750473 
+
+ Method -> GET - URL -> /api/users/2 - Time -> 1779354019752 
+
+ Method -> GET - URL -> /api/users/1 - Time -> 1779354079261 
+
+ Method -> GET - URL -> /api/users/2 - Time -> 1779354083877 
+
+ Method -> GET - URL -> /api/users/2 - Time -> 1779354127429 
+
+ Method -> GET - URL -> /api/users/3 - Time -> 1779354143755 
+
+ Method -> GET - URL -> /api/users/4 - Time -> 1779354148888 
+
+ Method -> GET - URL -> /api/users/5 - Time -> 1779354151732 
+
+ Method -> GET - URL -> /api/users/6 - Time -> 1779354160356 
+
+ Method -> GET - URL -> /api/users/7 - Time -> 1779354163151 
+
+ Method -> GET - URL -> /api/users/8 - Time -> 1779354165672 
+
+ Method -> GET - URL -> /api/users/10 - Time -> 1779354172388 
+
+ Method -> GET - URL -> /api/users/10 - Time -> 1779354330872 
+
+ Method -> GET - URL -> /api/users/10 - Time -> 1779354333080 
+
+ Method -> GET - URL -> /api/users/10 - Time -> 1779354496748 
+
+ Method -> POST - URL -> /api/users - Time -> 1779354584252 
