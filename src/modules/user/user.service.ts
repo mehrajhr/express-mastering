@@ -23,15 +23,21 @@ const getSingleUserFromDB = async (id: string) => {
 };
 
 const createUserInDB = async (payload: Iuser) => {
-  const { name, email, password, age } = payload;
+  const { name, email, password, age, role } = payload;
+
+  const allowedRoles: [string, string, string] = ["user", "admin", "agent"];
+
+  if(role && !allowedRoles.includes(role)){
+    throw new Error("Invalid role!");
+  }
 
   const hashPassword = await bcrypt.hash(password, 12);
 
   const result = await pool.query(
     `
-    INSERT INTO users (name , email , password , age) VALUES($1,$2,$3,$4) RETURNING *
+    INSERT INTO users (name , email , password , age , role) VALUES($1,$2,$3,$4,COALESCE($5, 'user')) RETURNING *
     `,
-    [name, email, hashPassword, age],
+    [name, email, hashPassword, age, role],
   );
 
   delete result.rows[0].password;
