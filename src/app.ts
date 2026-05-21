@@ -7,9 +7,11 @@ import { userRoute } from "./modules/user/user.route";
 import { profileRoute } from "./modules/profile/profile.route";
 import { authRoute } from "./modules/auth/auth.route";
 import logger from "./middleware/logger";
+import cookieParser from "cookie-parser";
 
 const app: Application = express();
 
+app.use(cookieParser()); //middlewar
 app.use(express.json()); //midleware
 app.use(express.text()); //midleware
 app.use(express.urlencoded({ extended: true })); // midleware
